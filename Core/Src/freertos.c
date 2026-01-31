@@ -147,9 +147,6 @@ void StartSerialTask(void *argument)
 {
   /* USER CODE BEGIN StartSerialTask */
   char msg[] = "Hello from FreeRTOS Serial Task!\r\n";
-
-
-  
   /* Infinite loop */
   for(;;)
   {
