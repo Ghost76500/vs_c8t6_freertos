@@ -151,7 +151,7 @@ void StartSerialTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    HAL_UART_Transmit(&huart2, (uint8_t*)msg, sizeof(msg)-1, HAL_MAX_DELAY);
+    HAL_UART_Transmit_DMA(&huart2, (uint8_t*)msg, sizeof(msg)-1);
     osDelay(500);
   }
   /* USER CODE END StartSerialTask */
@@ -161,4 +161,4 @@ void StartSerialTask(void *argument)
 /* USER CODE BEGIN Application */
 
 /* USER CODE END Application */
-
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
