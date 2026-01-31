@@ -27,6 +27,7 @@
 /* USER CODE BEGIN Includes */
 
 #include "usart.h"
+#include "arm_math.h"
 
 /* USER CODE END Includes */
 
