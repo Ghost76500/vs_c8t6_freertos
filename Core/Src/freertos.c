@@ -128,11 +128,14 @@ void MX_FREERTOS_Init(void) {
 void StartLEDTask(void *argument)
 {
   /* USER CODE BEGIN StartLEDTask */
+  uint16_t counter = 0;
   /* Infinite loop */
   for(;;)
   {
     HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
     osDelay(200);
+    counter++;
   }
   /* USER CODE END StartLEDTask */
 }
@@ -148,10 +151,16 @@ void StartSerialTask(void *argument)
 {
   /* USER CODE BEGIN StartSerialTask */
   char msg[] = "Hello from FreeRTOS Serial Task!\r\n";
+  char data[32];
+  uint8_t counter = 0;
   /* Infinite loop */
   for(;;)
   {
-    HAL_UART_Transmit_DMA(&huart2, (uint8_t*)msg, sizeof(msg)-1);
+    counter++;
+    //HAL_UART_Transmit_DMA(&huart1, (uint8_t*)msg, sizeof(msg) - 1);
+    //HAL_UART_Transmit_DMA(&huart1, (uint8_t*)&counter, sizeof(counter));
+    snprintf(data, sizeof(data), "Counter: %d\r\n", counter);
+    HAL_UART_Transmit_DMA(&huart1, (uint8_t*)data, strlen(data));
     osDelay(500);
   }
   /* USER CODE END StartSerialTask */
@@ -161,4 +170,4 @@ void StartSerialTask(void *argument)
 /* USER CODE BEGIN Application */
 
 /* USER CODE END Application */
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
