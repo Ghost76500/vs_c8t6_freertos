@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            // 任务名称：显示在菜单里的名字
+            "label": "🔥 一键烧录 (DAPLink)",
+            
+            // 任务类型：在终端执行命令
+            "type": "shell",
+            
+            // 核心命令：调用 OpenOCD
+            "command": "openocd",
+            
+            // 命令参数：相当于你在命令行里手敲的那些
+            "args": [
+                "-f", "interface/cmsis-dap.cfg", // 1. 选调试器
+                "-f", "target/stm32f1x.cfg",   // 2. 选芯片
+                "-c", "program build/Debug/vs_c8t6_freertos.elf verify reset exit" // 3. 烧录指令
+            ],
+            
+            // 这一行指令解释：
+            // program ... : 把指定位置的 elf 文件烧进去
+            // verify      : 烧完后读出来核对一遍（确保没烧错）
+            // reset       : 烧完复位芯片（让程序跑起来）
+            // exit        : 烧完立刻关闭 OpenOCD（释放端口）
+            
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        }
+    ]
+}

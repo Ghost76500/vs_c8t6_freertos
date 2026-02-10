@@ -1,0 +1,45 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        
+
+
+        {
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceRoot}/build/Debug/vs_c8t6_freertos.elf",
+            "name": "DAP Debugger (OpenOCD)",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/cmsis-dap.cfg",
+                "target/stm32f1x.cfg"
+                ],
+            "searchDir": [],
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none"
+        },
+        {
+            "name": "ST-Link (OpenOCD)",   // 菜单显示的名字
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "openocd",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/Debug/vs_c8t6_freertos.elf",
+            
+            "configFiles": [
+                "interface/stlink.cfg",     // 【关键】指定用 ST-Link
+                "target/stm32f1x.cfg"
+            ],
+            
+            // ========== 【关键修改】让出默认端口 ==========
+            //"gdbPort": 3334,      // 默认是 3333 -> 改成 3334
+            //"telnetPort": 4445,   // 默认是 4444 -> 改成 4445
+            //"tclPort": 6667,      // 默认是 6666 -> 改成 6667
+            // ===========================================
+
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none"
+        },
+    ]
+}
